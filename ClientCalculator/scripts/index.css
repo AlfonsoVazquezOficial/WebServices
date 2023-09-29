@@ -1,0 +1,86 @@
+:root {
+  --background-color: rgb(29, 18, 91);
+  --font-color: rgb(255, 255, 255);
+  --border-color: rgb(255, 255, 255);
+  --background-color-a: rgba(0, 0, 0, 0.6);
+  --transparent: rgba(0, 0, 0, 0);
+  --button-font-size: 1.5em;
+  --button-size: 70px;
+  --calculator-width: 400px;
+  --calculator-height: 55   0px;
+  --alt-font-color: rgb(87, 87, 87);
+}
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h-1 {
+  font-weight: 200;
+  font-size: 3em;
+}
+
+.calculator {
+  width: var(--calculator-width);
+  height: var(--calculator-height);
+  flex-wrap: wrap;
+  box-shadow: 1px solid var(--border-color);
+  background-color: var(--background-color-a);
+  border-radius: 20px;
+}
+
+
+.screen {
+    font-size: var(--button-font-size);
+    width: 80%;
+    height: 80px;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.buttons {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    background-color: var(--transparent);
+}
+.button-section {
+    background-color: var(--transparent);
+    display: inline-block;
+    height: auto;
+}
+.button {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--button-size);
+    height: var(--button-size);
+    border-radius: 10px;
+    font-size: var(--button-font-size);
+}
+
+.large-button {
+    width: calc((var(--button-size) * 2) + 30px);
+}
+
+.border {
+    border: 1px solid var(--border-color);
+}
+
+.button:hover {
+    background-color: var(--background-color-a);
+    cursor: pointer;
+}
+
+.footer {
+    color: var(--alt-font-color);
+}

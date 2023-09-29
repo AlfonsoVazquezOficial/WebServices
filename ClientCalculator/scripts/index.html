@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="header center">
+            <h1 class="h-1">Calculator</h1>
+        </div>
+        <div class="center">
+            <div class="calculator border">
+                <div class="screen border">
+                    <p class="screen-text center" id="screen-text"></p>  
+                </div>
+                <div class="buttons">
+                    <div class="button-section">
+                        <div class="button border" onclick="buttonPressed(this)">7</div>
+                        <div class="button border" onclick="buttonPressed(this)">4</div>
+                        <div class="button border" onclick="buttonPressed(this)">1</div>
+                    </div>
+                    <div class="button-section">
+                        <div class="button border" onclick="buttonPressed(this)">8</div>
+                        <div class="button border" onclick="buttonPressed(this)">5</div>
+                        <div class="button border" onclick="buttonPressed(this)">2</div>
+                    </div>
+                    <div class="button-section">
+                        <div class="button border" onclick="buttonPressed(this)">9</div>
+                        <div class="button border" onclick="buttonPressed(this)">6</div>
+                        <div class="button border" onclick="buttonPressed(this)">3</div>
+                        
+                    </div>
+                    <div class="button-section">
+                        <div class="button border" onclick="operationPressed(this)">+</div>
+                        <div class="button border" onclick="operationPressed(this)">-</div>
+                        <div class="button border" onclick="operationPressed(this)">*</div>
+                        
+                        
+                    </div>
+                    <div class="button-section">
+                        <div class="button border large-button" onclick="operationPressed(this)">=</div>
+                    </div>
+                    <div class="button-section" onclick="operationPressed(this)">
+                        <div class="button border">/</div>
+                    </div>
+                    <div class="button-section">
+                        <div class="button border" onclick="clearScreen()">C</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Made by Alfonso
+        </div>
+    </div>
+</body>
+</html>
