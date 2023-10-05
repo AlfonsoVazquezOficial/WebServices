@@ -21,52 +21,97 @@ app.listen(PORT, () => {
   console.log(`Servidor Node.js escuchando en el puerto ${PORT}`);
 });
 
-// Create a SOAP client
-soap.createClient(url, (err, client) => {
-  if (err) {
-    console.error("Error creating SOAP client:", err);
-    return;
-  }
+// Función para crear un cliente SOAP y realizar una llamada SOAP
+async function useSoapClient(method, numA, numB) {
+  return new Promise((resolve, reject) => {
+    soap.createClient(url, (err, client) => {
+      if (err) {
+        console.error("Error creating SOAP client:", err);
+        reject(err);
+        return;
+      }
 
-  // Call the add method of the SOAP service
-  const addArgs = {
-    num1: 10,
-    num2: 5,
-  };
+      // Call the add method of the SOAP service
+      const addArgs = {
+        num1: numA,
+        num2: numB,
+      };
 
-  client.add(addArgs, (err, result) => {
-    if (err) {
-      console.error("Error calling add:", err);
-      return;
-    }
-
-    console.log("Add Result:", result);
+      switch (method) {
+        case "sum":
+          client.add(addArgs, (err, result) => {
+            if (err) {
+              console.error("Error calling add:", err);
+              reject(err);
+              return;
+            }
+            console.log("Add Result:", result.result);
+            resolve(result);
+          });
+          break;
+        case "subtract":
+          client.subtract(addArgs, (err, result) => {
+            if (err) {
+              console.error("Error calling sub:", err);
+              reject(err);
+              return;
+            }
+            console.log("Sub Result:", result.result);
+            resolve(result);
+          });
+          break;
+        case "multiplication":
+          client.multiplication(addArgs, (err, result) => {
+            if (err) {
+              console.error("Error calling mult:", err);
+              reject(err);
+              return;
+            }
+            console.log("Multi Result:", result.result);
+            resolve(result);
+          });
+          break;
+          case "division":
+            client.division(addArgs, (err, result) => {
+              if (err) {
+                console.error("Error calling div:", err);
+                reject(err);
+                return;
+              }
+              console.log("Div Result:", result.result);
+              resolve(result);
+            });
+            break;  
+        default:
+          reject(new Error("Método SOAP no válido"));
+      }
+    });
   });
+}
 
-  // Call the subtract method of the SOAP service
-  const subtractArgs = {
-    num1: 10,
-    num2: 5,
-  };
+// Ruta para peticiones
+app.get("/soap", async (req, res) => {
+  // Obtén los parámetros de consulta de la URL
+  const method = req.query.method;
+  const numA = req.query.numA;
+  const numB = req.query.numB;
 
-  client.subtract(subtractArgs, (err, result) => {
-    if (err) {
-      console.error("Error calling subtract:", err);
-      return;
-    }
+  // Realiza acciones con las variables
+  // Por ejemplo, imprime las variables en la consola
+  console.log("Method:", method);
+  console.log("NumA:", numA);
+  console.log("NumB:", numB);
 
-    console.log("Subtract Result:", result);
-  });
+  try {
+    const result = await useSoapClient(method, numA, numB);
+    console.log("Result:", result.result);
 
-  // Ruta para peticiones
-  app.get("/soap", (req, res) => {
-    // Obtén los parámetros de consulta de la URL
-    const variable1 = req.query.variable1;
-
-    // Realiza acciones con las variables
-    // Por ejemplo, imprime las variables en la consola
-    console.log("Variable 1:", variable1);
     // Envía la respuesta al cliente
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
+    res.redirect("/?result=" + result.result);
+  } catch (error) {
+    console.error("Error en la llamada SOAP:", error);
+
+    // Envía una respuesta de error al cliente
+    res.status(500).send("Error en la llamada SOAP");
+  }
 });
