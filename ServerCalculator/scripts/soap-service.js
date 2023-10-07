@@ -7,8 +7,22 @@ const app = express();
 
 // Middleware de CORS para permitir solicitudes desde un dominio específico (en este caso, http://localhost:3000)
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/soap"); // Cambia esto según tu dominio
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  const allowedOrigins = [
+    "http://192.168.228.185:3000/soap",
+    "http://localhost:3000/soap", // Agrega otros dominios aquí
+    "http://anotherdomain.com",
+  ];
+
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   next();

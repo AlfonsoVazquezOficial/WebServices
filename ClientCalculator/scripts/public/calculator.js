@@ -30,7 +30,7 @@ const convertToFloat = (value) => {
 };
 
 const operationPressed = (e) => {
-    setValues();
+  setValues();
   if (isActiveOperation()) {
     operate();
     clearOperations();
@@ -52,7 +52,7 @@ const isActiveOperation = () => {
 };
 
 const setActiveOperation = (operation) => {
-    clearScreen();
+  clearScreen();
   switch (operation) {
     case "+":
       isSum = true;
@@ -83,7 +83,7 @@ const operate = () => {
     if (isDiv) {
       numA = div(numA, numB);
     }
-    
+
     numB = 0;
     console.log("-----------");
     printValues();
@@ -93,8 +93,8 @@ const operate = () => {
 };
 
 const sum = (numA, numB) => {
-    isSum = false;
-    redirectURL("sum", numA, numB);
+  isSum = false;
+  redirectURL("sum", numA, numB);
 };
 
 const sub = (numA, numB) => {
@@ -113,7 +113,7 @@ const div = (numA, numB) => {
 };
 
 const redirectURL = (method, numA, numB) => {
-    url = `http://localhost:3000/soap?method=${method}&numA=${numA}&numB=${numB}`;
+  url = `http://localhost:3000/soap?method=${method}&numA=${numA}&numB=${numB}`;
   window.location.href = url;
 };
 
